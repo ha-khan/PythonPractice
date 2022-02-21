@@ -44,13 +44,16 @@ Constraints:
 
 class LRUCache():
     def __init__(self) -> None:
-        self.cache = dict()
+        self.cache = dict[int, int]()
+        self.total = int(0)
         
     def get(self, key: int) -> int:
-        return 0 
+        if key in self.cache:
+            return self.cache[key]
+        return -1
 
     def put(self, key: int, value: int) -> None:
-        pass
+        self.cache[key] = value
 
 def main():
     print("Running Main")
