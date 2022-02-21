@@ -40,26 +40,27 @@ Constraints:
     0 <= value <= 105
     At most 2 * 105 calls will be made to get and put.
 """
-
+from queue import PriorityQueue
 
 class LRUCache():
-    def __init__(self) -> None:
+    def __init__(self, capacity: int) -> None:
         self.cache = dict[int, int]()
         self.total = int(0)
+        # Need to think about heapify
+        self.queue = PriorityQueue[int](capacity)
         
     def get(self, key: int) -> int:
-        if key in self.cache:
-            return self.cache[key]
-        return -1
+        return self.cache[key] if key in self.cache else -1
 
     def put(self, key: int, value: int) -> None:
         self.cache[key] = value
 
 def main():
     print("Running Main")
-
-    lru_cache = LRUCache()
+    lru_cache = LRUCache(10)
     lru_cache.put(1, 2) 
+    print(lru_cache.get(1))
+    print(lru_cache.get(4))
 
 if __name__ == '__main__':
     main()
