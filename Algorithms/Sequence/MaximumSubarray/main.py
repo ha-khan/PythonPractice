@@ -36,9 +36,9 @@ class MaximumSubarray:
             space ~ O(1) 
         '''
         for idx, _ in enumerate(self.nums):
-            for idy, _ in enumerate(self.nums[idx:]):
-                if self.largest < sum(self.nums[idx:idy+1]):
-                    self.largest = sum(self.nums[idx:idy+1])
+            for idy in range(idx, len(self.nums) + 1):
+                if self.largest < sum(self.nums[idx:idy]):
+                    self.largest = sum(self.nums[idx:idy])
         return self.largest
 
 
