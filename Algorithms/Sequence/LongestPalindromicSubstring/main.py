@@ -1,59 +1,61 @@
-
 class LongestPalindromicSubstring:
     """
         Longest Palindromic Substring is a Class that creates instances objects 
-        that can compute whether a given str has a substr that is palindromic, and
-        if yes, then it will compute what the longest substr in the str 
+        that can compute what the longest palindroming substring in a given str is.
 
-        Fun fact, the set of all languages that are palindromic are not regular
-        meaning no DFA exists that accepts palindromic strings and since no DFA, 
-        then no regular expression, which would use used to match substr within a str 
+        Approaches problem with two approaches 
+
     """
+    import math
+
     def __init__(self, input: str) -> None:
-        import math
-
         self.input = input
-        self.longest = 0
-        self.math = math
 
-    def compute_slow_iteration(self) -> int:
+    def compute_iteration(self) -> int:
         """
-            Brute-Force approach of checking all possible substrings from the given string
-            a lot of work is duplicated, so this approach is very suboptimal, and will not scale well
+            Iteratively enumerate all possible substrings within a given range, check each one whether or not palindrome
+            if yes, then compute length and keep track of longest seen plaindrome seen thus far
+
+            we need to enumerate all possible substrings exactly once so .. O(n^2) is unavoidable
+
         """
+        longest = 0
         for idx, _ in enumerate(self.input):
             for idy in range(idx, len(self.input)+1):
+                if idx == idy: continue
                 if self.is_palindromic(self.input[idx:idy]):
-                    if len(self.input[idx:idy]) > self.longest:
-                        self.longest = len(self.input[idx:idy])
-        return self.longest
+                    longest = max(len(self.input[idx:idy]), longest)
+        return longest
 
-    def compute_slow_recursion(self) -> int:
+
+    def compute_recursion(self) -> int:
         """
-            Recursively "iterate"
-            Brute-Force approach of checking all possible substrings from the given string
-            a lot of work is duplicate,  
+           Recursively enumerate all possible substrings within a given range, check each one whether or not palindrome
+           return right away, else recurse further
+           
+           solution uses a top-down dynamic programming approach where recursion will continue if memo table not already
+           compute max palindromic substring
         """
-        size = len(self.input)
-        def recurse(left_ptr: int, right_ptr: int):
-            if left_ptr > size or right_ptr > size:
-                return
+        memo = {}
+        def recurse(i: int, j: int) -> int:
+            if (i, j) in memo:
+                return memo[(i,j)]
             
-            if self.is_palindromic(self.input[left_ptr:right_ptr]):
-                if len(self.input[left_ptr:right_ptr]) > self.longest:
-                    self.longest = len(self.input[left_ptr:right_ptr])
+            # we return rather than recurse as any substring within string
+            # would be smaller, so doesn't matter if another palindrome is nested here
+            if self.is_palindromic(self.input[i:j]):
+                memo[(i, j)] = len(self.input[i:j])
+                return len(self.input[i:j])
 
-            # recurse right_ptr quickly 
-            recurse(left_ptr, right_ptr + 1)
-            recurse(left_ptr + 1, right_ptr + 1)
-        recurse(0, 1)    
-        return self.longest
+            # If not palindrome, then compute that this string has palindrome len of 0
+            # so future computations won't redo computation
+            memo[(i, j)] =  0
 
-    def compute_fast_memory(self) -> int:
-        return 0
+            left = recurse(i + 1, j) if (i + 1, j) not in memo else memo[(i + 1, j)]
+            right = recurse(i, j - 1) if (i, j - 1) not in memo else memo[(i, j - 1)]
 
-    def compute_fast_no_memory(self) -> int:
-        return 0 
+            return max(left, right)
+        return recurse(0, len(self.input) + 1)
 
     def is_palindromic(self, input: str) -> bool:
         """
@@ -64,16 +66,15 @@ class LongestPalindromicSubstring:
             substr = int(size/ 2)
             return input[:substr] == input[substr:size+1][::-1]
         
-        mid = self.math.floor(size/2)
+        mid = LongestPalindromicSubstring.math.floor(size/2)
         return input[:mid] == input[mid+1:][::-1]
 
 
 def main():
     print("Running Main")
-    l = LongestPalindromicSubstring("bcab")
-    #print(l.compute_slow_iteration())
-    print(l.is_palindromic("bcab"))
-    # print(l.compute_slow_recursion())
+    l = LongestPalindromicSubstring("abcdefghijklmnracecaropqrstuvwxyz")
+    print(l.compute_recursion())
+    print(l.compute_iteration())
 
 
 if __name__ == '__main__':
