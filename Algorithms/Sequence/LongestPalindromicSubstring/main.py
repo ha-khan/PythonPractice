@@ -2,9 +2,6 @@ class LongestPalindromicSubstring:
     """
         Longest Palindromic Substring is a Class that creates instances objects 
         that can compute what the longest palindroming substring in a given str is.
-
-        Approaches problem with two approaches 
-
     """
     import math
 
@@ -16,7 +13,9 @@ class LongestPalindromicSubstring:
             Iteratively enumerate all possible substrings within a given range, check each one whether or not palindrome
             if yes, then compute length and keep track of longest seen plaindrome seen thus far
 
-            we need to enumerate all possible substrings exactly once so .. O(n^2) is unavoidable
+            we need to enumerate all possible substrings exactly once so quadratic time is not avoidable 
+            time  ~ O(n^2)
+            space ~ O(1) 
 
         """
         longest = 0
@@ -35,6 +34,9 @@ class LongestPalindromicSubstring:
            
            solution uses a top-down dynamic programming approach where recursion will continue if memo table not already
            compute max palindromic substring
+
+           time  ~ O(n^2)
+           space ~ O(n^2)
         """
         memo = {}
         def recurse(i: int, j: int) -> int:
