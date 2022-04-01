@@ -1,6 +1,3 @@
-from re import I
-
-
 class LongestPalindromicSubstring:
     """
         Longest Palindromic Substring is a Class that creates instances objects 
@@ -73,9 +70,9 @@ class LongestPalindromicSubstring:
            time  ~ O(n^2)
            space ~ O(n^2)
         """
-        from functools import lru_cache
+        from functools import cache
         
-        @lru_cache
+        @cache
         def recurse(i: int, j: int) -> int:
             # we return rather than recurse as any substring within string
             # would be smaller, so doesn't matter if another palindrome is nested here
@@ -100,7 +97,6 @@ class LongestPalindromicSubstring:
         mid = LongestPalindromicSubstring.math.floor(size/2)
         return input[:mid] == input[mid+1:][::-1]
 
-
 def main():
     print("Running Main")
     l = LongestPalindromicSubstring("abcdefghijklmnracecaropqrstuvwxyz")
@@ -108,7 +104,5 @@ def main():
     print(l.compute_iteration())
     print(l.compute_recursion_2())
 
-
 if __name__ == '__main__':
     main()
-
