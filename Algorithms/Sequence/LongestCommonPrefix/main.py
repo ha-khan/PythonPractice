@@ -31,26 +31,51 @@ Constraints:
 
 class Solution:
 
-    def __init__(self, strs: List[str]) -> str:
+    def __init__(self, strs: List[str]) -> None:
         self.strs = strs
 
     def __repr__(self) -> str:
-        cache = "["
+        buffer = "["
         for s in self.strs:
-            cache += s + ", "
-        cache += "]"
-        return cache
+            buffer += s + ", "
+        buffer += "]"
+
+        return buffer
     
     def __len__(self) -> int:
         return len(self.strs)
 
+    def __call__(self) -> str:
+        longest_prefix = ""
+        starting = self.strs[0]
+        stop = False
 
+        for idx, rune in enumerate(starting):
+            for str in self.strs:
+                try:
+                    if rune != str[idx]:
+                        stop = True
+                except IndexError:
+                    stop = True
+
+            if not stop:
+                longest_prefix += rune
+            else:
+                break
+
+        return longest_prefix
 
 
 def main():
-    s = Solution(["flower", "flow", "flight"])
+    s = Solution(["flower", "flow", "fl"])
     print(s)
     len(s)
+    print(s())
+
+    s2 = Solution(["dog", "racecar", "car"])
+    print(s2)
+    len(s2)
+    print(s2())
     
 
 if __name__ == '__main__':
