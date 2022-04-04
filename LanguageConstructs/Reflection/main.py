@@ -5,3 +5,19 @@
 class Orchestrator:
     def __init__(self):
         pass
+
+
+# id()
+# hash()
+# isinstance()
+# issubclass()
+# hasattr()
+# getattr()
+# setattr()
+# delattr()
+# globals()
+# locals()
+# dir()
+# callable()
+# vars()
+# type()
