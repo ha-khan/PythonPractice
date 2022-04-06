@@ -68,7 +68,7 @@ def main():
     # since no reference will have destructor called
     VMOrchestrator()
 
-    # access class method by traversing up method resolution chain of ResourceOrchestrator class object
+    # access class method by traversing up method resolution chain of VMOrchestrator class object
     print(VMOrchestrator.__mro__[1].__dict__['instance_counter'])
     VMOrchestrator.invoke(1, 2, 3, 4)
     r.invoke()

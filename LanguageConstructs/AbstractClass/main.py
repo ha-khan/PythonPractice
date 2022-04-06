@@ -14,7 +14,7 @@ class Orchestrator(ABC):
         '''
         pass
 
-class VN(Orchestrator):
+class VM(Orchestrator):
     def __init__(self):
         pass
 
@@ -22,7 +22,7 @@ class VN(Orchestrator):
         print("instantiate")
 
 def main():
-    v = VN()
+    v = VM()
     v.instantiate()
 
 
