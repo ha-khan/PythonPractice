@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 # https://docs.python.org/3.9/library/collections.abc.html
+# The cure for repetition is abstraction.
 
 
 class Orchestrator(ABC):
