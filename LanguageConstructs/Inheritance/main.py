@@ -4,6 +4,7 @@
 # __mro__
 # __basis__
 # __name__
+# __class__
 
 class Orchestrator:
 
@@ -14,7 +15,9 @@ class Orchestrator:
 
         # need to use Orchestrator class instance attribute selector
         # to access class variables, in this scope 
-        Orchestrator.instance_counter += 1
+        cls = self.__class__
+        
+        cls.instance_counter += 1
 
         # instance attribute
         self.type = type 

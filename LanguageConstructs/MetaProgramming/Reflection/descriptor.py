@@ -1,12 +1,3 @@
-# x = '''print(123)'''
-
-# can turn this into a templated string and
-# dynamically construct complex objects using arguments to 
-# those string functions
-x = "print(123)"
-
-exec(x)
-
 
 
 class Client():
@@ -27,7 +18,6 @@ class Client():
     def __init__(self, type: str) -> None:
         self.resource = 0
         self.type = type
-        self.__dict__['set_{}_utilization'.format(self.type)] = eval('lambda a: print(\'setting utilzation to: {}\'.format(a))') 
     
     def __set__(self, instance, val) -> None:
         if val > 0:
@@ -47,19 +37,20 @@ class Orchestrator:
     storage = Client("storage")
     network = Client("network")
 
-    def __init__(self, cpu, memory, network, storage) -> None:
-        
-        pass
+    def __init__(self, cpu, memory, network, storage, name) -> None:
+        self.cpu = cpu
+        self.memory = memory
+        self.network = network
+        self.storage = storage
+        self.name = name
 
 
 def main():
-    o = Orchestrator()
-
-    Orchestrator.cpu.set_cpu_utilization(1)
-    Orchestrator.memory.set_memory_utilization(1)
-    Orchestrator.network.set_network_utilization(1)
-    Orchestrator.storage.set_storage_utilization(1)
-
+    try:
+        o = Orchestrator(1, 1, 0, 1, "xyz")
+    except ValueError as e:
+        print(e)
+        o = Orchestrator(1, 1, 1, 1, "xyz")
 
 
 if __name__ == '__main__':

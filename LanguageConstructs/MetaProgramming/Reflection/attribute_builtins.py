@@ -14,7 +14,7 @@ class Orchestrator:
 
     def __setattr__(self, __name: str, __value: Any) -> None:
         """
-            setattr() operator or . operator will invoke this special method and "hook" in a 
+            setattr() operator or . operator will always invoke this special method and "hook" in a 
             check to see if setting an attribute dynamically (monkey patch)  
         """
         if __name in vars(self):
@@ -27,15 +27,18 @@ class Orchestrator:
         # if __name in vars(self):
         #     return self.__dict__[__name]
         # return vars(self)[__name]
-        
 
-    
+
 def main():
     o = Orchestrator()
 
     apply = lambda a: print('applying {}'.format(a))
+
+    # invokes __setattr__
     setattr(o,'apply', apply)
     print('Has attribute \'apply\' is {}'.format(hasattr(o, 'apply')))
+
+    # invokes __getattr__
     o_apply = getattr(o, 'apply')
     o_apply('deployment')
 
