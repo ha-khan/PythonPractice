@@ -1,4 +1,9 @@
 
+# id()
+# hash()
+# __mro__
+# __basis__
+# __name__
 
 class Orchestrator:
 
@@ -40,10 +45,14 @@ class VMOrchestrator(Orchestrator):
         # call its __init__, after this class's __init__ is finished executing
         # method resolution order (__mro__)
         super().__init__("VM")
+    
+    def check_state(self):
+        print("checking VM state ...")
+        # return super().check_state()
 
     def request_vm(self):
         try:
-            super().check_state()
+            self.check_state
         except:
             print("unable to request vm")
 
@@ -64,9 +73,10 @@ def main():
     # Calls constructor; creates an instance object where we reference it with the label r
     r = VMOrchestrator()
 
-    # Creates an instance object; not assigned to any label
+    # pointer to object's class object
+    # creates an instance object; not assigned to any label
     # since no reference will have destructor called
-    VMOrchestrator()
+    r.__class__()
 
     # access class method by traversing up method resolution chain of VMOrchestrator class object
     print(VMOrchestrator.__mro__[1].__dict__['instance_counter'])
@@ -76,7 +86,11 @@ def main():
     # Calls direct base class's check_state method
     r.request_vm()
 
+    assert VMOrchestrator.__name__ == 'VMOrchestrator'
+
     print(VMOrchestrator.get_instance_count())
+    print(isinstance(r, VMOrchestrator))
+    print(issubclass(VMOrchestrator, Orchestrator))
 
     # Calls destructor
     del r
