@@ -4,8 +4,10 @@
 # dynamically construct complex objects using arguments to 
 # those string functions
 x = "print(123)"
-
 exec(x)
+
+# Other languages have the concept of macros where at compile time 
+# code would be generated and inserted at various portions onthe source
 
 
 

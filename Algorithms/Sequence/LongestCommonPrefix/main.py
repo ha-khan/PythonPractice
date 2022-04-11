@@ -55,6 +55,9 @@ class Solution:
                 try:
                     if rune != str[idx]:
                         stop = True
+                # use an IndexError exception as a halting condition
+                # simpler than formulating a more clever halting condition based on some
+                # criteria of structure of the solution
                 except IndexError:
                     stop = True
 
