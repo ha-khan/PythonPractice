@@ -64,9 +64,6 @@ class StreamProcessor(ABC):
 
         # cleaner way to access names defined at StreamProcessor scope
         cls = self.__class__
-
-        self.buffer = ""
-        self.read_len = 3
         self.reader =  cls.Reader(file_name)
     
     def compute(self):
