@@ -23,5 +23,15 @@ def main():
         assert hasattr(o, '__dict__') == False
         pprint.pprint(dir(o))
 
+    try:
+        class VMO(Orchestrator):
+            # limited to class definition its defined in (superclass, subclass, ..etc)
+            __slots__ = ['disk']
+            def __init__(self) -> None:
+                super().__init__()
+        setattr(VMO(), 'IO', 123)
+    except Exception as e:
+        print(e)
+
 if __name__ == '__main__':
     main()
