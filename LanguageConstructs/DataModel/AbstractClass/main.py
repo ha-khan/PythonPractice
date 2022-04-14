@@ -16,15 +16,21 @@ class Orchestrator(ABC):
         pass
 
 class VM(Orchestrator):
-    def __init__(self):
-        pass
+    def __init__(self, name: str):
+        self.__name = name
+        self.__alias_ = name
 
     def instantiate(self):
         print("instantiate")
 
 def main():
-    v = VM()
+    v = VM('resource')
     v.instantiate()
+    try:
+        print(v.__name)
+    except:
+        print(v._VM__name)
+        print(v._VM__alias_)
 
 
 if __name__ == '__main__':
