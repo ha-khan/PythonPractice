@@ -10,13 +10,15 @@ class Orchestrator(ABC):
 
     @abstractmethod
     def instantiate(self):
-        '''
+        """
             instantiate
-        '''
+        """
         pass
 
 class VM(Orchestrator):
     def __init__(self, name: str):
+
+        # https://docs.python.org/3/tutorial/classes.html#private-variables
         self.__name = name
         self.__alias_ = name
 
