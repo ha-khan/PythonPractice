@@ -10,5 +10,9 @@ def main():
     lll = [z for z in filter(lambda x: x in ['aa', 'cc', 'ee', 'gg'], ll)]
     print(lll)
 
+    l.append('h')
+    llll = [a for a in zip(l, ll)]
+    print(llll)
+
 if __name__ == '__main__':
     main()
