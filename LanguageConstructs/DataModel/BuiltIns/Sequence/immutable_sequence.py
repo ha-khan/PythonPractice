@@ -1,3 +1,0 @@
-# tuple
-# str
-# bytes

@@ -5,8 +5,8 @@
 def main():
     l = [1, 2]
 
-    # immutable tuple datatype implements __hash__
-    # and can be used as a dict key
+    # immutable sequence instances implements __hash__
+    # and can be used in dict, set, frozenset 
     ll = (1, 2) 
     mp = dict()
     try:
