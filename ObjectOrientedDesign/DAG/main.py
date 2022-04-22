@@ -17,6 +17,10 @@ class DAG:
             self.edges.append(n)
         
     def __init__(self, init: List[tuple[int, int]]) -> None:
+        """
+            TODO: need to add a validation check on whether input
+                  contains a cycle, which goes against the DAG invariant
+        """
         self.cache = {}
         for (src, dst) in init:
             if src not in self.cache and dst not in self.cache:
@@ -46,8 +50,18 @@ class DAG:
             buffer += f'{key} --> {sorted([x.value for x in val.edges])}\n'
         return buffer
 
-    def dfs(self, source: int, target: int) -> int:
-        return -1
+    def topological_sort(self) -> str:
+        buffer = ''
+        return buffer
+    
+    def dfs(self) -> str:
+        return ""
+    
+    def bfs(self) -> str:
+        return ""
+    
+    # def __iter__(self):
+    #     pass
 
 def main():
     print("Constructing DAG")
