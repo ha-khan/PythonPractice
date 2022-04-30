@@ -28,13 +28,24 @@ class Tree(ABC):
             
             return l[0], left, right
 
-
     def __init__(self, instance) -> None:
-        if not self.validate_if_tree(instance):
+        try:
+            self.validate_if_tree(instance)
+        except:
             raise Exception('Given instance does not satisfy the contraints to be a Tree!')
 
-    def validate_if_tree(self, instance) -> bool:
-        return True
+    def validate_if_tree(self, instance) -> None:
+        visited = set()
+        def dfs(cursor):
+            if cursor is None:
+                return
+            if id(cursor) in visited:
+                raise Exception("Found cycle!")
+            visited.add(id(cursor))
+            dfs(cursor.left)
+            dfs(cursor.right)
+        
+        dfs(instance.root)
         
 class BinaryTree(Tree):
     def __init__(self, l: List[Any]) -> None:
@@ -47,19 +58,47 @@ class BinaryTree(Tree):
         # run validation
         super().__init__(self)
     
-    def inorder_traversal(self) -> None:
+    def inorder_traversal(self) -> str:
+        buffer = []
         def dfs(cursor):
             if cursor is None:
                 return
             dfs(cursor.left)
-            print(cursor.val)
+            buffer.append(cursor.val)
             dfs(cursor.right)
-        
         dfs(self.root)
+
+        return repr(buffer)
+    
+    def preorder_traversal(self) -> str:
+        buffer = []
+        def dfs(cursor):
+            if cursor is None:
+                return
+            buffer.append(cursor.val)
+            dfs(cursor.left)
+            dfs(cursor.right)
+        dfs(self.root)
+
+        return repr(buffer)
+    
+    def postorder_traversal(self) -> str:
+        buffer = []
+        def dfs(cursor):
+            if cursor is None:
+                return
+            dfs(cursor.left)
+            dfs(cursor.right)
+            buffer.append(cursor.val)
+        dfs(self.root)
+
+        return repr(buffer)
 
 def main():
     b = BinaryTree([1, 2, 3, 4, 5])
-    b.inorder_traversal()
+    print(b.inorder_traversal())
+    print(b.preorder_traversal())
+    print(b.postorder_traversal())
 
 if __name__ == '__main__':
     main()
