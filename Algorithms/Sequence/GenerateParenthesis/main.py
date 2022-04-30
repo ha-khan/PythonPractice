@@ -27,7 +27,7 @@ class GenerateParenthesis:
         self.n = n*2
     
     def __call__(self) -> List[str]:
-        return [""]
+        return self.solution_0()
 
     @staticmethod 
     def is_balanced(s: str) -> bool:
@@ -75,7 +75,7 @@ class GenerateParenthesis:
     
 def main():
     s = GenerateParenthesis(3)
-    print(f'Input: n = {s.n}\nOutput: {s()}')
+    print(f'Input: n = {int(s.n/2)}\nOutput: {s()}')
     print(s.is_balanced('(())()'))
     print(s.solution_0())
 
