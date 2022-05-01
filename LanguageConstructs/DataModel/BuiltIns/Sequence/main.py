@@ -82,7 +82,15 @@ def main():
     b = b'123' # literal
     
     # strings
-    s = "123"  # liteal
+    s = "'123'"  # literal, can embed unescape '
+    s = '"123"'  # literal, can embed unescaped "
+    s = """
+This is a multi-line
+string object, rather than
+a single line 
+one
+        """
+    s = "this" " is" " concatenated" 
     
 
 

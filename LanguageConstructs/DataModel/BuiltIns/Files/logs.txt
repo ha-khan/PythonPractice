@@ -1,0 +1,18 @@
+mongo-express_1  | (node:7) [MONGODB DRIVER] Warning: Current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+mongo-express_1  | Could not connect to database using connectionString: mongodb://admin:admin@mongo:27017/"
+mongo-express_1  | (node:7) UnhandledPromiseRejectionWarning: MongoNetworkError: failed to connect to server [mongo:27017] on first connect [Error: connect ECONNREFUSED 192.168.16.2:27017
+mongo-express_1  |     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1144:16) {
+mongo-express_1  |   name: 'MongoNetworkError'
+mongo-express_1  | }]
+mongo-express_1  |     at Pool.<anonymous> (/node_modules/mongodb/lib/core/topologies/server.js:441:11)
+mongo-express_1  |     at Pool.emit (events.js:314:20)
+mongo-express_1  |     at /node_modules/mongodb/lib/core/connection/pool.js:564:14
+mongo-express_1  |     at /node_modules/mongodb/lib/core/connection/pool.js:1000:11
+mongo-express_1  |     at /node_modules/mongodb/lib/core/connection/connect.js:32:7
+mongo-express_1  |     at callback (/node_modules/mongodb/lib/core/connection/connect.js:300:5)
+mongo-express_1  |     at Socket.<anonymous> (/node_modules/mongodb/lib/core/connection/connect.js:330:7)
+mongo-express_1  |     at Object.onceWrapper (events.js:421:26)
+mongo-express_1  |     at Socket.emit (events.js:314:20)
+mongo-express_1  |     at emitErrorNT (internal/streams/destroy.js:92:8)
+mongo-express_1  |     at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)
+mongo-express_1  |     at processTicksAndRejections (internal/process/task_queues.js:84:21)

@@ -37,9 +37,10 @@ def main():
     print(dir(AbstractClass))
     print(dir(AbstractClass.main))
 
+    from sys import modules
+    print(modules)
+
     # https://docs.python.org/3/library/functions.html#import__
 
 if __name__ == '__main__':
     main()
-
-
