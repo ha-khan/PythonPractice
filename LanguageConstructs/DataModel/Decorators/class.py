@@ -27,5 +27,7 @@ def main():
 
     print(dir(ResourceCheck))
 
+    assert ResourceCheck.__name__ == 'decorator'
+
 if __name__ == '__main__':
     main()
