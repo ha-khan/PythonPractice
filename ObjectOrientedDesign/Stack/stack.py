@@ -1,4 +1,5 @@
 from queue import Empty, LifoQueue
+from collections import deque
 from typing import Any
 from abc import ABC, abstractmethod
 

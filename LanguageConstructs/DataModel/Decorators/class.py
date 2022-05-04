@@ -2,6 +2,10 @@
 
 
 def singleton(cls):
+    """
+        works because classes are "first class" callable objects
+        which essentially makes them functions 
+    """
     instances = {}
     def decorator(*args, **kwargs):
         if cls not in instances:

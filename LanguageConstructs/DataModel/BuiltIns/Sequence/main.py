@@ -90,7 +90,7 @@ string object, rather than
 a single line 
 one
         """
-    s = "this" " is" " concatenated" 
+    s = "this" " is" " concatenated"
     
 
 

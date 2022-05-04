@@ -18,17 +18,10 @@ class DAG:
         def insert(self, n):
             self.edges.append(n)
         
-    def __init__(self, init: List[tuple[int, int]], algorithm: str, eval_func: Callable) -> None:
+    def __init__(self, init: List[tuple[int, int]], eval_func=print) -> None:
         """
             default contructor 
         """
-
-        # annoying way to check if given algorithm satisfies
-        # the interface
-        if algorithm not in ['DFS', 'BFS']:
-            raise Exception('Given algorithm is not known!')
-        self.algorithm = algorithm
-
         if not callable(eval_func):
             raise Exception('Given eval_function is not callable!') 
         self.eval_func = eval_func
@@ -69,13 +62,11 @@ class DAG:
           structured somewhat in a strategy pattern way
           
           DFS, BFS ultimately drives the topological_sort
-
         """
         seen = set()
-        driver = self.dfs if self.algorithm is 'DFS' else self.bfs
         for _, node_reference in self.cache.items():
             if id(node_reference) not in seen:
-                driver(node_reference, seen)
+                self.dfs(node_reference, seen)
     
     def dfs(self, root, seen):
         def _dfs(cursor):
@@ -93,7 +84,18 @@ class DAG:
         _dfs(root)
     
     def bfs(self, root, seen):
-        pass
+        from queue import Queue
+        def _bfs(cursor):
+            layer = Queue()
+            layer.put(cursor)
+            while not layer.empty():
+                current_node = layer.get()
+                for node in current_node.edges:
+                    if id(node) not in seen:
+                        seen.add(id(node))
+                        layer.put(node)
+                self.eval_func(current_node.value)
+        _bfs(root)
    
     # def __iter__(self):
     #     pass
@@ -108,7 +110,7 @@ def main():
     #       v / 
     #        2
     #
-    dag = DAG([(1, 3), (1, 2), (2, 3), (3, 4)], 'DFS', print)
+    dag = DAG([(1, 3), (1, 2), (2, 3), (3, 4)])
     dag.topological_sort()
 
     from sys import stdout
