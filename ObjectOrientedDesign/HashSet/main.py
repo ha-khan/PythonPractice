@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 import logging
 from logging import DEBUG, INFO
 
+
 class AbstractSet(ABC):
     def __init__(self) -> None:
         pass
