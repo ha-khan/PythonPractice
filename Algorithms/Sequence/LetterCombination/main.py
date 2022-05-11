@@ -45,12 +45,33 @@ class EnumeratePhoneNumber:
         }
     
     def __call__(self) -> List[str]:
-        strs = []
+        """
+            Problem calls for all possible combinations, which is usually
+            an enumeration that can be done with recursion where a base case 
+            would stop the enumeration, meaning we've reached the end
+
+            in this we are recursing over the inputted digits string where
+            we grab the head at each recursive call and from that we iterate over each 
+            entry in the button_map and build a possible string entry
+
+            when recursive calls reach the base case, we can't recurse further from an 
+            empty string, so we record the built string thus far into 
+
+            time  ~ O(3^n), where n is the length of the inputted digits
+            space ~ O(3^n), where n is the length of the inputted digits
+
+            there are generally 3 recursive calls generated for each entry of a digit
+
+            so, if a digit has entry 1, 2
+
+            3 * 3
+        """
+        solution = []
 
         def recurse(remainder_str: str, current_str: str):
             # base case
             if remainder_str == '':
-                strs.append(current_str)
+                solution.append(current_str)
                 return
             
             head = remainder_str[0]
@@ -60,12 +81,28 @@ class EnumeratePhoneNumber:
         
         if self.digits != '': recurse(self.digits, "")
         
-        return strs
+        return solution
+    
+    def enumerate_with_iteration(self) -> List[str]:
+        """
+        
+        """
+        solution = ['']
+        for rune in self.digits:
+            buffer = []
+            for numeral in self.button_map[rune]:
+                for runes in solution:
+                    buffer.append(runes+numeral)
+            solution = list(buffer)
+
+        return solution 
 
 def main():
-    print(EnumeratePhoneNumber("23")())
-    print(EnumeratePhoneNumber("")())
-    print(EnumeratePhoneNumber("2")())
+    print(EnumeratePhoneNumber('23')())
+    print(EnumeratePhoneNumber('')())
+    print(EnumeratePhoneNumber('2')())
+    print(EnumeratePhoneNumber('23').enumerate_with_iteration())
+    assert sorted(EnumeratePhoneNumber('456')()) == sorted(EnumeratePhoneNumber('456').enumerate_with_iteration())
 
 if __name__ == '__main__':
     main()
