@@ -32,8 +32,13 @@ class MinimizeJumps:
     def __init__(self, nums: List[int]) -> None:
         self.nums = nums
     
-    def __call__(self) -> int:
-        return self.compute_slow()
+    def __call__(self, strategy: str) -> int:
+        import logging
+        try:
+            return getattr(self, strategy)()
+        except AttributeError:
+            logging.getLogger().error(f'incorrect strategy: \"{strategy}\" selected, defaulting to slow!')
+            return self.compute_slow()
     
     def compute_slow(self) -> int:
         """
@@ -46,14 +51,14 @@ class MinimizeJumps:
             once recursion reaches a termination condition, we potentially record the summation of unsiqned integers
             thus far in a priority queue which will prioritize based on 
 
-            time  ~  O(n^2)
-            space ~  O(n^2)
+            time  ~  O()
+            space ~  O()
             
         """
         from queue import PriorityQueue
         buffer = PriorityQueue()
 
-        def recurse(current_idx, hops):
+        def recurse(current_idx, hops) -> None:
             # hop is considered invalid, we do not record
             if current_idx > len(self.nums) - 1:
                 return
@@ -68,8 +73,8 @@ class MinimizeJumps:
             while val > 0:
                 recurse(current_idx + val, hops + 1)
                 val -= 1
+
         recurse(0, 0)
-            
         return buffer.get()[0]
 
 
@@ -93,6 +98,7 @@ class MinimizeJumps:
                 if scalar + current_idx <= len(self.nums) - 1:
                     hops.append(1 + recurse(scalar + current_idx))
             return min(hops) if hops else 100
+
         return recurse(0)
 
 
@@ -101,8 +107,8 @@ def main():
     from random import randint
     game_state = [randint(1, 5) for x in range(1, 23)]
     print(game_state)
-    print(MinimizeJumps(game_state)())
-    print(MinimizeJumps(game_state).compute_fast())
+    print(MinimizeJumps(game_state)('compute_quick'))
+    print(MinimizeJumps(game_state)('compute_fast'))
 
 if __name__ == '__main__':
     main()
