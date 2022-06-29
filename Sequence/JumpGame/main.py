@@ -25,7 +25,6 @@
 #
 #     1 <= nums.length <= 104
 #     0 <= nums[i] <= 1000
-
 from typing import List
 
 class MinimizeJumps:
