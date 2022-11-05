@@ -16,7 +16,7 @@ except ImportError as e:
     # 4. The contents of any .pth files (if present)
     # 5. The site-packages home of third-party extensions
     import sys
-    sys.path.append('/home/hk/Python/PythonPractice/LanguageConstructs/DataModel')
+    sys.path.append('/home/hk/Python/PythonPractice/LanguageConstructs/ControlFlow')
     from AbstractClass.main import VM
 
 def main():
